@@ -5,7 +5,9 @@ from abc import abstractmethod
 from uuid import uuid4
 
 from .timeutils import TimeUtils
-from ..data import db_path
+
+_this_dir = os.path.dirname(__file__)
+db_path = os.path.join(_this_dir, "memo.db")
 
 class UsrInfo(TypedDict):
     usr_id: str
@@ -155,7 +157,7 @@ class UsrDatabase(Database):
                                  usr_id TEXT PRIMARY KEY, 
                                  usr_name TEXT,
                                  access_key TEXT NOT NULL,
-                                 time_register FLOAT NOT NULL,
+                                 time_register FLOAT NOT NULL
                              );
                              """)
 
@@ -166,7 +168,7 @@ class UsrDatabase(Database):
                     usr_id,
                     usr_name,
                     access_key,
-                    time_register,
+                    time_register
                 FROM usrs WHERE usr_id=?
                 """, (usr_id, )
             ).fetchall()
@@ -218,7 +220,7 @@ class UsrDatabase(Database):
                 usr_id, 
                 usr_name,
                 access_key,
-                time_register,
+                time_register
                 )
             VALUES (?, ?, ?, ?)
             """,
