@@ -21,6 +21,7 @@ class Memo(TypedDict):
     time_edit: float
     usr_id: str
     content: str
+    attachment: List[str]   # List of file names associated with this memo_id
 
 class Database(object):
     logger = logging.getLogger("memo")
@@ -51,7 +52,8 @@ class MemoDatabase(Database):
                                  time_added FLOAT NOT NULL,
                                  time_edit FLOAT,
                                  usr_id TEXT, 
-                                 content TEXT
+                                 content TEXT,
+                                 attachment TEXT
                              );
                              """)
 
@@ -63,7 +65,8 @@ class MemoDatabase(Database):
                 time_added,
                 time_edit,
                 usr_id,
-                content
+                content,
+                attachment
             FROM memo WHERE memo_id=?
             """, (memo_id, )
         ).fetchall()
@@ -76,10 +79,11 @@ class MemoDatabase(Database):
             time_added = line_raw[1],
             time_edit = line_raw[2],
             usr_id = line_raw[3],
-            content = line_raw[4]
+            content = line_raw[4],
+            attachment = eval(line_raw[5]),
         )
 
-    def edit(self, usr_id: str, content: str, memo_id = None, **kwargs) -> Optional[Memo]:
+    def edit(self, usr_id: str, content: str, memo_id = None, attachment: List[str] = [], **kwargs) -> Optional[Memo]:
         """
         Add or edit a memo, set memo_id to None for adding
         - **kwargs: optional argumemts, time_added/time_edit/usr_id/(memo_id)
@@ -92,7 +96,8 @@ class MemoDatabase(Database):
                 "time_added": now_stamp,
                 "time_edit": now_stamp,
                 "usr_id": usr_id,
-                "content": content
+                "content": content,
+                "attachment": attachment
             }
             for k, v in kwargs.items():
                 memo[k] = v
@@ -103,9 +108,10 @@ class MemoDatabase(Database):
                                     time_added,
                                     time_edit,
                                     usr_id,
-                                    content
+                                    content,
+                                    attachment
                                     )
-                                VALUES (?, ?, ?, ?, ?)
+                                VALUES (?, ?, ?, ?, ?, ?)
                                 """, 
                                 (
                                     memo["memo_id"],
@@ -113,6 +119,7 @@ class MemoDatabase(Database):
                                     memo["time_edit"],
                                     memo["usr_id"],
                                     memo["content"],
+                                    repr(memo["attachment"])
                                 ))
         else:
             # check if exists
@@ -136,7 +143,8 @@ class MemoDatabase(Database):
                                     time_added=?,
                                     time_edit=?,
                                     usr_id=?,
-                                    content=?
+                                    content=?,
+                                    attachment=?
                                 WHERE memo_id=?
                                 """, 
                                 (
@@ -145,6 +153,7 @@ class MemoDatabase(Database):
                                     memo["usr_id"], 
                                     memo["content"],
                                     memo["memo_id"], 
+                                    repr(memo["attachment"])
                                 ))
         self.db_con.commit()
         return memo
