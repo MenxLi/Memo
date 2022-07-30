@@ -125,6 +125,7 @@ class MemoDatabase(Database):
             # check if exists
             memo: Optional[Memo] = self[memo_id]
             if memo is None:
+                self.logger.warning("No such memo: %s" % memo_id)
                 return None
             if memo["usr_id"] != usr_id:
                 self.logger.warning(f"Ownership error: {usr_id} trying to edit ({memo['usr_id']})")
@@ -132,9 +133,6 @@ class MemoDatabase(Database):
             memo["time_edit"] = now_stamp
             memo["content"] = content
             for k, v in kwargs.items():
-                if k=="memo_id":
-                    self.logger.warning("Not allowed to edit memo_id")
-                    return None
                 memo[k] = v
             # edit db
             self.db_con.execute("""
@@ -152,8 +150,8 @@ class MemoDatabase(Database):
                                     memo["time_edit"], 
                                     memo["usr_id"], 
                                     memo["content"],
-                                    memo["memo_id"], 
-                                    repr(memo["attachment"])
+                                    repr(memo["attachment"]),
+                                    memo["memo_id"]
                                 ))
         self.db_con.commit()
         return memo

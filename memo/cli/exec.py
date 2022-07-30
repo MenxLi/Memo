@@ -1,7 +1,8 @@
-import sys
+import sys, os, subprocess
 import argparse
 import getpass
 import logging
+from typing import Optional
 from ..backend.database import UsrDatabase, MemoDatabase
 from ..backend.auth import checkUsr, generateHexHash
 from ..backend.timeutils import TimeUtils
@@ -24,6 +25,19 @@ def setLogger(level):
     logger.addHandler(ch)
     return logger
 
+def promptFileEdit(default = "") -> str:
+    __this_dir = os.path.realpath(os.path.dirname(__file__))
+    __this_dir = os.path.abspath(__this_dir)
+    file = os.path.join(__this_dir, "t.txt")
+    assert not os.path.exists(file)
+    with open(file, "w") as fp:
+        fp.write(default)
+    subprocess.call(["vim", file])
+    with open(file, "r") as fp:
+        out = fp.read()
+    os.remove(file)
+    return out
+
 def promptLogin() -> str:
     """
     Return valid usr_id
@@ -40,8 +54,12 @@ def promptLogin() -> str:
             break
     return RETURN
 
-def promptTime() -> float:
-    now_time_str = TimeUtils.localNowStr()
+def promptTime(default: Optional[float] = None) -> float:
+    if default is None:
+        now_time_str = TimeUtils.localNowStr()
+    else:
+        now_time_str = TimeUtils.toStr(TimeUtils.stamp2Local(default))
+
     while True: 
         input_str = input("Please enter time:\n (default: {}) ".format(now_time_str)) 
         sys.stdout.write("\r")  # delete this line
@@ -108,9 +126,13 @@ if __name__ == '__main__':
         exit()
 
     if args.command == "add":
+        content = promptFileEdit()
+        if content == "":
+            print("abort.")
+            exit()
         print("=======(START)========")
-        content = sys.stdin.read()
-        print("\n========(END)=========")
+        print(content)
+        print("========(END)=========")
         time_stamp = promptTime()
         memo_db.edit(usr_id, content, time_added = time_stamp)
 
@@ -120,11 +142,19 @@ if __name__ == '__main__':
         assert not memo is None
         print("=======(START)========")
         print(memo["content"])
-        print("\n========(END)=========")
+        print("========(END)=========")
 
     if args.command == "edit":
         memo_id = promptMemoId(usr_id)
         memo = memo_db[memo_id]
         assert not memo is None
-        ...
+        content = promptFileEdit(memo["content"])
+        if content == "":
+            print("abort.")
+            exit()
+        print("=======(START)========")
+        print(content)
+        print("========(END)=========")
+        time_stamp = promptTime(memo["time_added"])
+        memo_db.edit(usr_id, content, memo_id=memo["memo_id"], time_added = time_stamp)
 
