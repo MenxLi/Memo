@@ -158,6 +158,23 @@ class MemoDatabase(Database):
         self.db_con.commit()
         return memo
 
+    def briefInfo(self, usr_id: str):
+        """
+        represents every entry as: [
+            memo_id, time_added, name
+        ]
+        """
+        selection = self.db_con.execute(
+            """
+            SELECT 
+                memo_id,
+                time_added,
+                content
+            FROM memo WHERE usr_id=?
+            """, (usr_id, )
+        ).fetchall()
+        return selection
+
 
 class UsrDatabase(Database):
     def _createTable(self):
