@@ -99,6 +99,17 @@ def promptMemoId(usr_id) -> str:
         if 0<idx<=len(info):
             return info[idx-1][0]
 
+def promptAction(*actions: str) -> str:
+    while True:
+        print("-------Choose yor action--------")
+        for i, a in enumerate(actions):
+            print(f"{i+1}. {a}")
+        print("input: ", end="")
+        print("--------------------------------")
+        a = input()
+        if int(a) in range(1, len(actions) + 1):
+            ans = actions[int(a)]
+            return ans
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Memo")
