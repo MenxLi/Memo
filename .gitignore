@@ -9,3 +9,11 @@ __pycache__
 *.tmp.*
 
 *.db
+
+# Ignore frontend javascript
+# To be compiled from typescript
+memo/frontend/scripts/*
+!memo/frontend/scripts/.gitkeep
+
+node_modules
+package-lock.json
