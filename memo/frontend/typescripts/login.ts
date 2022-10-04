@@ -1,7 +1,7 @@
 
 import {setCookie} from "./libs/cookie.js";
 import {sha256} from "./libs/sha256lib.js"
-import {BACKENDURL, AuthInfoT, AuthReturnT} from './config.js'
+import {BACKENDURL, AuthInfoT, FRONTENDURL} from './config.js'
 
 
 function onSubmitLogin(){
@@ -15,6 +15,7 @@ function onSubmitLogin(){
         onSuccess : () => {
             setCookie("usrId", usrId, 3);
             setCookie("usrEncPasswd", encPasswd, 3);
+            window.location.href = `${FRONTENDURL}/index.html`;
         },
         onFailure : (msg: string) => {
             alert(msg);
@@ -22,7 +23,7 @@ function onSubmitLogin(){
     });
 }
 
-function authUsr(
+export function authUsr(
     usrId: string, 
     encPasswd: string,
     {
@@ -48,6 +49,7 @@ function authUsr(
               }).then(
                   (response) => {
                       if (response.ok){
+                          // response is of AuthReturnT
                           return response.text();
                       }
                       else{
