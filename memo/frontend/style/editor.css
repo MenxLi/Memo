@@ -7,6 +7,10 @@ div.operation{
     display: flex;
 }
 
+div.btn{
+    margin-left: auto;
+}
+
 #inputView {
     min-height: 150px;
     width: 100%;
