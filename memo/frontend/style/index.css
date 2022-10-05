@@ -1,0 +1,24 @@
+
+div.index_entry{
+    background-color: #eee;
+    max-width: 80vw;
+    margin: 10px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.index_entry:hover{
+    background-color: #39f;
+    color: white;
+}
+div.index_entry:hover, div.index_entry *:hover {
+    cursor: pointer;
+}
+label.uid{
+    font-size: x-small;
+    vertical-align: middle;
+}
+label.short_content{
+    font-size: x-small;
+    vertical-align: middle;
+}

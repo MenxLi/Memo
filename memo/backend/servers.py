@@ -57,7 +57,7 @@ class IndexHandler(BaseHandler):
                 "uid": inf[0],
                 "time_added": inf[1],
                 "title": content_split[0],
-                "short_content": content_main[:cutoff_idx]
+                "short_content": "\n".join(content_main[:cutoff_idx])
             }
             brief_info.append(_b_info)
 
