@@ -2,11 +2,10 @@
 import json
 import tornado.web
 import http.cookies
-from typing import Callable, Optional
 
-from .protocalT import BriefInfoT
+from .protocalT import BriefInfoT, MemoManipulateT, MemoManipulateResponseT
 from .auth import checkUsr
-from .database import MemoDatabase
+from .database import MemoDatabase, Memo
 
 class BaseHandler(tornado.web.RequestHandler):
     cookies: http.cookies.SimpleCookie
@@ -87,3 +86,34 @@ class MemoHandler(BaseHandler):
 
         self.set_header("Content-Type", "application/json")
         self.write(dict(memo))
+
+    def post(self):
+        if not self.validateUsr():
+            raise tornado.web.HTTPError(401)
+
+        self.set_header("Content-Type", "application/json")
+
+        db = MemoDatabase()
+        body = self.request.body.decode("utf-8")
+        instruction: MemoManipulateT = json.loads(body)
+
+        if instruction["action"] == "edit":
+            if "memo" not in instruction:
+                raise tornado.web.HTTPError(400)
+            memo = instruction["memo"]
+            print(memo)
+            success = db.edit(
+                self.usr_id, 
+                content = memo["content"],
+                memo_id = memo["memo_id"],          # set to None for create new
+                time_added = memo["time_added"]
+            )
+            ret: MemoManipulateResponseT = {
+                "status": success is not None
+            }
+            self.write(dict(ret))
+
+        else:
+            raise NotImplementedError
+
+

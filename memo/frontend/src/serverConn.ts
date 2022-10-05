@@ -12,12 +12,25 @@ export interface BriefInfoT {
 }
 
 export interface MemoT {
-    memo_id: string;
+    memo_id: string | null;
+    // Time stamp are in seconds
     time_added: number;
     time_edit: number;
     usr_id: string;
     content: string;
     attachment: string[];
+}
+// export interface MemoNewT extends Omit<MemoT, "memo_id">{
+//     memo_id: null
+// }
+
+export interface MemoManipulateJsonT {
+    action: "edit" | "delete";
+    memo: MemoT;
+}
+
+export interface MemoManipulateResponseJsonT {
+    status: boolean;
 }
 
 export class ServerConn{
@@ -61,6 +74,26 @@ export class ServerConn{
             return memo;
         }
         throw Error(`Got response (${response.status})`);
+    }
+
+    async saveMemo(memo: MemoT): Promise<boolean> {
+
+        const postParams: MemoManipulateJsonT = {
+            action: "edit",
+            memo: memo
+        }
+        const response = await fetch(
+            `${this.BACKENDURL}/memo`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(postParams)
+            }
+        );
+        const ret: MemoManipulateResponseJsonT = await response.json();
+        return ret["status"];
     }
 }
 

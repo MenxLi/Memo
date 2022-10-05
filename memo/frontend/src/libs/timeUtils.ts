@@ -28,3 +28,20 @@ export function utcStamp2LocaleStr(stamp: number, isSecond = false): string{
 export function stamp2Input(stamp: number, inputElem: HTMLInputElement, isSecond = false): void {
     inputElem.value = utcStamp2LocaleStr(stamp, isSecond).replace(" ", "T");
 }
+
+/*
+ * read from a datetime-local input field and return stamp
+* */
+export function input2Stamp(inputElem: HTMLInputElement, returnSecond = false): number{
+    const rawStr = inputElem.value;
+    if (!rawStr){
+        // Empty...
+        throw new Error("Empty time string");
+    }
+    const dt = new Date(rawStr);
+    let stamp = dt.getTime();
+    if (returnSecond){
+        stamp /= 1000;
+    }
+    return stamp;
+}
