@@ -71,6 +71,9 @@ function switchModeView(){
     editSaveBtn.style.backgroundColor = "";
     editSaveBtn.style.color = "";
 
+    timeAddedInput.readOnly = true;
+    timeAddedInput.style.color = "#999"
+
     inputView.readOnly = true;
     inputView.style.backgroundColor = "#eee";
 }
@@ -78,6 +81,9 @@ function switchModeEdit(){
     editSaveBtn.value = "Save";
     editSaveBtn.style.backgroundColor = "#39d";
     editSaveBtn.style.color = "white";
+
+    timeAddedInput.readOnly = false;
+    timeAddedInput.style.color = ""
 
     inputView.readOnly = false;
     inputView.style.backgroundColor = "";
