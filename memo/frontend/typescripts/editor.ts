@@ -21,18 +21,24 @@ function swithMode(){
     if (!inputView.readOnly){
         // Read only mode
         editSaveBtn.value = "Edit";
+        editSaveBtn.style.backgroundColor = "";
+        editSaveBtn.style.color = "";
+
         inputView.readOnly = true;
+        inputView.style.backgroundColor = "#eee";
     }
     else{
         // View mode
         editSaveBtn.value = "Save";
+        editSaveBtn.style.backgroundColor = "#39d";
+        editSaveBtn.style.color = "white";
+
         inputView.readOnly = false;
+        inputView.style.backgroundColor = "";
     }
 }
 
-/*
- * grow textarea
-* */
+/* grow textarea */
 function autoGrow(elem: HTMLTextAreaElement){
     elem.style.height = "auto";
     elem.style.height = (elem.scrollHeight) + "px";

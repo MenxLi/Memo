@@ -3,8 +3,23 @@ body {
     margin-bottom: 0px;
 }
 
+div.operation{
+    display: flex;
+}
+
 #inputView {
-    min-height: 50px;
+    min-height: 150px;
     width: 100%;
+    padding: 10px;
+    border: 0px;
+    border-radius: 5px;
+    color: #333;
+    font-family: "宋体", SimSun, STSong;
+}
+
+#editSaveBtn {
+    min-width: 100px;
+    margin-right: 0px;
+    margin-left: auto;
 }
 

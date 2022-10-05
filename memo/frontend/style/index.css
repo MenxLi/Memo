@@ -8,7 +8,7 @@ div.index_entry{
     margin-right: auto;
 }
 div.index_entry:hover{
-    background-color: #39f;
+    background-color: #39d;
     color: white;
 }
 div.index_entry:hover, div.index_entry *:hover {

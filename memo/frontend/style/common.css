@@ -8,3 +8,7 @@ body {
     margin-right: auto;
 }
 
+input[type="button"]{
+    border-radius: 5px;
+}
+
