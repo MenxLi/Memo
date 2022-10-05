@@ -12,30 +12,35 @@ function loadMemo(memo: MemoT){
     stamp2Input(memo.time_added, timeAddedInput, true);
     inputView.value = memo.content;
     autoGrow(inputView);
-    swithMode();
-
+    switchModeView();
 }
 
 /* swith inputView mode between view and edit */
-function swithMode(){
-    if (!inputView.readOnly){
-        // Read only mode
-        editSaveBtn.value = "Edit";
-        editSaveBtn.style.backgroundColor = "";
-        editSaveBtn.style.color = "";
-
-        inputView.readOnly = true;
-        inputView.style.backgroundColor = "#eee";
+function onClickEditSaveBtn(){
+    if (inputView.readOnly){
+        // Edit mode
+        switchModeEdit();
     }
     else{
         // View mode
-        editSaveBtn.value = "Save";
-        editSaveBtn.style.backgroundColor = "#39d";
-        editSaveBtn.style.color = "white";
-
-        inputView.readOnly = false;
-        inputView.style.backgroundColor = "";
+        switchModeView();
     }
+}
+function switchModeView(){
+    editSaveBtn.value = "Edit";
+    editSaveBtn.style.backgroundColor = "";
+    editSaveBtn.style.color = "";
+
+    inputView.readOnly = true;
+    inputView.style.backgroundColor = "#eee";
+}
+function switchModeEdit(){
+    editSaveBtn.value = "Save";
+    editSaveBtn.style.backgroundColor = "#39d";
+    editSaveBtn.style.color = "white";
+
+    inputView.readOnly = false;
+    inputView.style.backgroundColor = "";
 }
 
 /* grow textarea */
@@ -68,5 +73,7 @@ inputView.addEventListener("input", () => {
     autoGrow(inputView);
 });
 
-editSaveBtn.addEventListener("click", swithMode);
+inputView.addEventListener("dblclick", switchModeEdit);
+
+editSaveBtn.addEventListener("click", onClickEditSaveBtn);
 
