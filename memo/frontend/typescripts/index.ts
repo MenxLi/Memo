@@ -1,6 +1,7 @@
 import {getCookie, setCookie} from './libs/cookie.js'
 import {FRONTENDURL} from './config.js'
 import {authUsr} from './login.js'
+import {ServerConn, BriefInfoT} from './serverConn.js'
 import "./banner.js"
 
 function checkUsrInfo(): void {
@@ -22,5 +23,24 @@ function checkUsrInfo(): void {
     });
 }
 
+function fetchBriefInfo(){
+    const conn = new ServerConn();
+    conn.index().then(
+        render,
+        (failed) => {
+            console.log(failed);
+        }
+    );
+}
+
+function render(briefInfo: BriefInfoT[]){
+    let bInfo: BriefInfoT;
+    for (bInfo of briefInfo){
+
+    }
+}
+
 // main
 checkUsrInfo();
+fetchBriefInfo();
+
