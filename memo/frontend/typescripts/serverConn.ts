@@ -11,6 +11,15 @@ export interface BriefInfoT {
     short_content: string;
 }
 
+export interface MemoT {
+    memo_id: string;
+    time_added: number;
+    time_edit: number;
+    usr_id: string;
+    content: string;
+    attachment: string[];
+}
+
 export class ServerConn{
     constructor(){ };
 
@@ -35,6 +44,21 @@ export class ServerConn{
             const res = await response.json();
             let info: BriefInfoT[] = res["brief_info"];
             return info;
+        }
+        throw Error(`Got response (${response.status})`);
+    }
+
+    /*
+     * Get detailed info about one memo
+    * */
+    async fetchMemo(memo_id: string): Promise<MemoT> {
+        const fetchUrl = new URL(`${this.BACKENDURL}/memo`);
+        fetchUrl.searchParams.append("memo_id", memo_id);
+        const response = await fetch(fetchUrl.toString());
+        if (response.ok){
+            const memo: MemoT = await response.json();
+            console.log(memo);
+            return memo;
         }
         throw Error(`Got response (${response.status})`);
     }

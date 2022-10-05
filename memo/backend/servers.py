@@ -68,3 +68,22 @@ class IndexHandler(BaseHandler):
         self.set_header("Content-Type", "application/json")
 
         self.write(ret)
+
+class MemoHandler(BaseHandler):
+    """
+    Deal with singe memo manipulation
+    """
+
+    def get(self):
+        if not self.validateUsr():
+            raise tornado.web.HTTPError(401)
+
+        memo_id = self.get_argument("memo_id", default="0")
+        db = MemoDatabase()
+        memo = db[memo_id]
+        
+        if memo is None:
+            raise tornado.web.HTTPError(400)    # bad request
+
+        self.set_header("Content-Type", "application/json")
+        self.write(dict(memo))

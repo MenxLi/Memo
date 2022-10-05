@@ -2,7 +2,7 @@ import asyncio, os
 import tornado.web
 import tornado.autoreload
 from tornado.routing import _RuleList
-from .backend.servers import AuthHandler, IndexHandler
+from .backend.servers import AuthHandler, IndexHandler, MemoHandler
 
 __this_dir = os.path.dirname(__file__)
 
@@ -19,6 +19,7 @@ def make_app():
         (r"^/frontend/(.*?)$", tornado.web.StaticFileHandler, {"path": os.path.join(__this_dir, "frontend")}),
         (r"^/auth", AuthHandler),
         (r"^/index", IndexHandler),
+        (r"^/memo", MemoHandler),
     ]
 
     return tornado.web.Application(

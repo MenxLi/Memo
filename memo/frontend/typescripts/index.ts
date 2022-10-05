@@ -5,6 +5,8 @@ import {ServerConn, BriefInfoT} from './serverConn.js'
 import { utcStamp2LocaleStr } from './libs/timeUtils.js'
 import "./banner.js"
 
+const conn = new ServerConn();
+
 function checkUsrInfo(): void {
     const usrId = getCookie("usrId");
     const usrEncPasswd = getCookie("usrEncPasswd");
@@ -25,7 +27,6 @@ function checkUsrInfo(): void {
 }
 
 function fetchBriefInfo(){
-    const conn = new ServerConn();
     conn.index().then(
         render,
         (failed) => {
@@ -65,7 +66,9 @@ function render(briefInfo: BriefInfoT[]){
         const redirectMethod = function(){
             const uid = bInfo.uid;
             return ()=>{
-                console.log(uid);
+                const url = new URL(`${conn.FRONTENDURL}/editor.html`);
+                url.searchParams.append("memo_id", uid)
+                window.location.href = url.toString();
             }
         }
 
