@@ -2,7 +2,7 @@ import asyncio, os
 import tornado.web
 import tornado.autoreload
 from tornado.routing import _RuleList
-from .backend.servers import AuthHandler, IndexHandler, MemoHandler
+from .backend.handlers import AuthHandler, IndexHandler, MemoHandler
 
 __this_dir = os.path.dirname(__file__)
 
