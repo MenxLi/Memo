@@ -102,15 +102,18 @@ class MemoHandler(BaseHandler):
                 raise tornado.web.HTTPError(400)
             memo = instruction["memo"]
             print(memo)
-            success = db.edit(
+            memo_new = db.edit(
                 self.usr_id, 
                 content = memo["content"],
                 memo_id = memo["memo_id"],          # set to None for create new
                 time_added = memo["time_added"]
             )
             ret: MemoManipulateResponseT = {
-                "status": success is not None
+                "status": memo_new is not None
             }
+            if memo["memo_id"] is None and memo_new:
+                # Created new memo
+                ret["memo_id"] = memo_new["memo_id"]
             self.write(dict(ret))
 
         elif instruction["action"] == "delete":

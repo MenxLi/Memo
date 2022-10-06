@@ -1,5 +1,5 @@
 import {getCookie, setCookie} from './libs/cookie.js'
-import {FRONTENDURL} from './config.js'
+import {FRONTENDURL, getMemoURL} from './config.js'
 import {authUsr} from './login.js'
 import {ServerConn, BriefInfoT} from './serverConn.js'
 import { utcStamp2LocaleStr } from './libs/timeUtils.js'
@@ -70,9 +70,7 @@ function render(briefInfo: BriefInfoT[]){
         const redirectMethod = function(){
             const uid = bInfo.uid;
             return ()=>{
-                const url = new URL(`${conn.FRONTENDURL}/editor.html`);
-                url.searchParams.append("memo_id", uid)
-                window.location.href = url.toString();
+                window.location.href = getMemoURL(uid);
             }
         }
 
@@ -87,5 +85,12 @@ document.querySelector("div#banner #logoutBtn")?.addEventListener(
     "click", () => {
         eraseUsrInfo();
         window.location.href = `${conn.FRONTENDURL}/login.html`;
+    }
+)
+document.querySelector("div#banner #writeBtn")?.addEventListener(
+    "click", () => {
+        const url = new URL(`${conn.FRONTENDURL}/editor.html?new`);
+        url.searchParams.append("memo_id", "new");
+        window.location.href = url.toString();
     }
 )

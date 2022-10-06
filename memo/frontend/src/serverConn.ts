@@ -32,6 +32,7 @@ export interface MemoManipulateJsonT {
 
 export interface MemoManipulateResponseJsonT {
     status: boolean;
+    memo_id?: string;
 }
 
 export class ServerConn{
@@ -77,7 +78,7 @@ export class ServerConn{
         throw Error(`Got response (${response.status})`);
     }
 
-    async saveMemo(memo: MemoT): Promise<boolean> {
+    async saveMemo(memo: MemoT): Promise<MemoManipulateResponseJsonT> {
 
         const postParams: MemoManipulateJsonT = {
             action: "edit",
@@ -94,10 +95,10 @@ export class ServerConn{
             }
         );
         const ret: MemoManipulateResponseJsonT = await response.json();
-        return ret["status"];
+        return ret;
     }
 
-    async deleteMemo(memoId: string): Promise<boolean> {
+    async deleteMemo(memoId: string): Promise<MemoManipulateResponseJsonT> {
         const postParams: MemoManipulateJsonT = {
             action: "delete",
             memo_id: memoId,
@@ -113,7 +114,7 @@ export class ServerConn{
             }
         );
         const ret: MemoManipulateResponseJsonT = await response.json();
-        return ret["status"];
+        return ret;
     }
 }
 

@@ -2,6 +2,7 @@
 import {ServerConn, MemoT} from './serverConn.js'
 import {stamp2Input, input2Stamp} from './libs/timeUtils.js'
 import {getCookie} from './libs/cookie.js';
+import { getMemoURL } from './config.js';
 
 const conn = new ServerConn();
 const timeAddedInput: HTMLInputElement = document.querySelector("#timeAddedInput")!;
@@ -49,8 +50,15 @@ function saveMemo(memo: MemoT){
     memo.time_added = timeAddedStamp;
 
     conn.saveMemo(memo).then(
-        (status: boolean) => {
-            if (status) console.log("success");
+        (ret) => {
+            if (ret.status) {
+                console.log("success");
+                if (ret.memo_id){
+                    // when creating new memo, retuen will include memo_id
+                    // redirect to this new url
+                    window.location.href = getMemoURL(ret.memo_id);
+                }
+            }
             else {
                 alert("Failed to save.");
             }
@@ -132,6 +140,8 @@ function autoGrow(elem: HTMLTextAreaElement){
 const memoId = new URL(window.location.href).searchParams.get("memo_id");
 if (memoId === "new"){
     loadNewMemo();
+    switchModeEdit();
+    inputView.focus();
 }
 else if (memoId === null){
     throw new Error("Can't get memo_id from url");

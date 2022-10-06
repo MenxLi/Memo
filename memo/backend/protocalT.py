@@ -15,5 +15,8 @@ class MemoManipulateT(_MemoManipulateT, total = False):
     memo: Memo
     memo_id: str
 
-class MemoManipulateResponseT(TypedDict):
+class _MemoManipulateResponseT(TypedDict):
     status: bool
+
+class MemoManipulateResponseT(_MemoManipulateResponseT, total = False):
+    memo_id: str
