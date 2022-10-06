@@ -22,3 +22,7 @@ label.short_content{
     font-size: x-small;
     vertical-align: middle;
 }
+
+div.banner input[type="button"]{
+    min-width: 75px;
+}

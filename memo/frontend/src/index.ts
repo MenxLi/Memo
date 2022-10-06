@@ -3,6 +3,7 @@ import {FRONTENDURL, getMemoURL} from './config.js'
 import {authUsr} from './login.js'
 import {ServerConn, BriefInfoT} from './serverConn.js'
 import { utcStamp2LocaleStr } from './libs/timeUtils.js'
+import { setValueChangeOnHover } from './libs/uiUtils.js'
 
 const conn = new ServerConn();
 
@@ -79,18 +80,33 @@ function render(briefInfo: BriefInfoT[]){
 }
 
 // main
+const logoutBtn: HTMLInputElement = document.querySelector("div#banner #logoutBtn")!;
+const writeBtn: HTMLInputElement = document.querySelector("div#banner #writeBtn")!;
+
 checkUsrInfo();
 fetchBriefInfo();
-document.querySelector("div#banner #logoutBtn")?.addEventListener(
+logoutBtn.addEventListener(
     "click", () => {
         eraseUsrInfo();
         window.location.href = `${conn.FRONTENDURL}/login.html`;
     }
 )
-document.querySelector("div#banner #writeBtn")?.addEventListener(
+setValueChangeOnHover<HTMLInputElement, string>(
+    logoutBtn, 
+    (elem) => {return elem.value},
+    (elem, val) => {elem.value = val},
+    () => {return "logout"}
+)
+writeBtn.addEventListener(
     "click", () => {
         const url = new URL(`${conn.FRONTENDURL}/editor.html?new`);
         url.searchParams.append("memo_id", "new");
         window.location.href = url.toString();
     }
+)
+setValueChangeOnHover<HTMLInputElement, string>(
+    writeBtn, 
+    (elem) => {return elem.value},
+    (elem, val) => {elem.value = val},
+    () => {return "write"}
 )
