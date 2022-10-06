@@ -1,8 +1,8 @@
 
-import {ServerConn, MemoT} from './serverConn.js'
+import {ServerConn} from './serverConn.js'
 import {stamp2Input, input2Stamp} from './libs/timeUtils.js'
 import {getCookie} from './libs/cookie.js';
-import { getMemoURL } from './config.js';
+import { getMemoURL, MemoT, MemoManipulateResponseJsonT} from './protocal.js';
 
 const conn = new ServerConn();
 const timeAddedInput: HTMLInputElement = document.querySelector("#timeAddedInput")!;
@@ -84,8 +84,8 @@ function deleteMemo(memo: MemoT){
     }
 
     conn.deleteMemo(memoId).then(
-        (status: boolean) => {
-            if (status) {
+        (ret: MemoManipulateResponseJsonT) => {
+            if (ret.status) {
                 window.location.href = `${conn.FRONTENDURL}/index.html`;
             }
         },

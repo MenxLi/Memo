@@ -1,7 +1,7 @@
 
 import {setCookie} from "./libs/cookie.js";
 import {sha256} from "./libs/sha256lib.js"
-import {BACKENDURL, AuthInfoT, FRONTENDURL} from './config.js'
+import {BACKENDURL, AuthInfoT, FRONTENDURL} from './protocal.js'
 
 
 function onSubmitLogin(){

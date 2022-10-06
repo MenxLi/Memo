@@ -1,39 +1,16 @@
 /*
  * Commnunicate (Connect) with the server
  * */
-import {FRONTENDURL, BACKENDURL} from "./config.js"
+import {
+    FRONTENDURL, 
+    BACKENDURL, 
+    BriefInfoT, 
+    MemoT, 
+    MemoManipulateJsonT, 
+    MemoManipulateResponseJsonT
+} from "./protocal.js"
+
 import {getCookie} from "./libs/cookie.js"
-
-export interface BriefInfoT {
-    uid: string;
-    title: string;
-    time_added: number;
-    short_content: string;
-}
-
-export interface MemoT {
-    memo_id: string | null;
-    // Time stamp are in seconds
-    time_added: number;
-    time_edit: number;
-    usr_id: string;
-    content: string;
-    attachment: string[];
-}
-// export interface MemoNewT extends Omit<MemoT, "memo_id">{
-//     memo_id: null
-// }
-
-export interface MemoManipulateJsonT {
-    action: "edit" | "delete";
-    memo?: MemoT;
-    memo_id?: string;
-}
-
-export interface MemoManipulateResponseJsonT {
-    status: boolean;
-    memo_id?: string;
-}
 
 export class ServerConn{
     constructor(){ };

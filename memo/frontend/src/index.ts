@@ -1,7 +1,7 @@
 import {getCookie, setCookie} from './libs/cookie.js'
-import {FRONTENDURL, getMemoURL} from './config.js'
+import {FRONTENDURL, getMemoURL, BriefInfoT} from './protocal.js'
 import {authUsr} from './login.js'
-import {ServerConn, BriefInfoT} from './serverConn.js'
+import {ServerConn} from './serverConn.js'
 import { utcStamp2LocaleStr } from './libs/timeUtils.js'
 import { setValueChangeOnHover } from './libs/uiUtils.js'
 
