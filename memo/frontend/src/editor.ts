@@ -7,6 +7,7 @@ const conn = new ServerConn();
 const timeAddedInput: HTMLInputElement = document.querySelector("#timeAddedInput")!;
 const editSaveBtn: HTMLInputElement = document.querySelector("#editSaveBtn")!;
 const deleteBtn: HTMLInputElement = document.querySelector("#deleteBtn")!;
+const homeBtn: HTMLInputElement = document.querySelector("#homeBtn")!;
 const inputView: HTMLTextAreaElement = document.querySelector("#inputView")!;
 let thisMemo: MemoT;
 
@@ -35,8 +36,14 @@ function loadNewMemo(){
 }
 
 function saveMemo(memo: MemoT){
-    // Should catch error here...
-    const timeAddedStamp = input2Stamp(timeAddedInput, true);
+    let timeAddedStamp: number;
+    try{
+        timeAddedStamp = input2Stamp(timeAddedInput, true);
+    }
+    catch (err){
+        alert(err);
+        return;
+    }
 
     memo.content = inputView.value;
     memo.time_added = timeAddedStamp;
@@ -148,3 +155,4 @@ editSaveBtn.addEventListener("click", onClickEditSaveBtn);
 
 deleteBtn.addEventListener("click", ()=>{deleteMemo(thisMemo)});
 
+homeBtn.addEventListener("click", ()=>{window.location.href = `${conn.FRONTENDURL}/index.html`})

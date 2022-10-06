@@ -10,5 +10,6 @@ body {
 
 input[type="button"]{
     border-radius: 5px;
+    min-height: 25px;
 }
 
