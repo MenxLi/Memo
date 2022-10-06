@@ -16,10 +16,10 @@ def autoreloadHook():
 def make_app():
 
     rules: _RuleList = [
-        (r"^/frontend/(.*?)$", tornado.web.StaticFileHandler, {"path": os.path.join(__this_dir, "frontend")}),
-        (r"^/auth", AuthHandler),
-        (r"^/index", IndexHandler),
-        (r"^/memo", MemoHandler),
+        (r"^/backend/auth", AuthHandler),
+        (r"^/backend/index", IndexHandler),
+        (r"^/backend/memo", MemoHandler),
+        (r"^/(.*?)$", tornado.web.StaticFileHandler, {"path": os.path.join(__this_dir, "frontend")}),
     ]
 
     return tornado.web.Application(

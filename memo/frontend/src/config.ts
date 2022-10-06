@@ -1,6 +1,6 @@
 
-export const BACKENDURL = 'http://localhost:8888';
-export const FRONTENDURL = 'http://localhost:8888/frontend';
+export const BACKENDURL = 'http://localhost:8888/backend';
+export const FRONTENDURL = 'http://localhost:8888';
 
 // Protocals
 export interface AuthInfoT {
