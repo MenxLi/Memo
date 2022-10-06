@@ -1,8 +1,7 @@
 
-import {setCookie} from "./libs/cookie.js";
+import {setCookie, getCookie} from "./libs/cookie.js";
 import {sha256} from "./libs/sha256lib.js"
 import {BACKENDURL, AuthInfoT, FRONTENDURL} from './protocal.js'
-
 
 function onSubmitLogin(){
     const usrIdInput: HTMLInputElement = document.querySelector("#usr_id")!; // ! <- non-null assertion
@@ -19,6 +18,25 @@ function onSubmitLogin(){
         },
         onFailure : (msg: string) => {
             alert(msg);
+        }
+    });
+}
+
+export function checkUsrInfo(): void {
+    const usrId = getCookie("usrId");
+    const usrEncPasswd = getCookie("usrEncPasswd");
+    authUsr(usrId, usrEncPasswd, {
+        onSuccess : () => {
+            setCookie("usrId", usrId, 3);
+            setCookie("usrEncPasswd", usrEncPasswd, 3);
+        },
+        onFailure : (msg: string) => {
+            if (msg == "nouser" || msg == "unauthorized"){
+                window.location.href = `${FRONTENDURL}/login.html`;
+            }
+            else{
+                alert(`Failed to check usrInfo - (${msg})`);
+            }
         }
     });
 }
@@ -73,4 +91,10 @@ function encTextSha256(txt: string): string{
 }
 
 // main
-document.querySelector("#submit_btn")?.addEventListener("click", onSubmitLogin);
+// this script may be impoted as a module
+// but the following code won't run on other scripts
+// because querySelector will result in null
+const submitBtn = document.querySelector("#submit_login_btn");
+if (submitBtn){
+    submitBtn.addEventListener("click", onSubmitLogin);
+}

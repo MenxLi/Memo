@@ -1,30 +1,11 @@
-import {getCookie, setCookie} from './libs/cookie.js'
-import {FRONTENDURL, getMemoURL, BriefInfoT} from './protocal.js'
-import {authUsr} from './login.js'
+import {setCookie} from './libs/cookie.js'
+import {getMemoURL, BriefInfoT} from './protocal.js'
 import {ServerConn} from './serverConn.js'
+import { checkUsrInfo } from './login.js'
 import { utcStamp2LocaleStr } from './libs/timeUtils.js'
 import { setValueChangeOnHover } from './libs/uiUtils.js'
 
 const conn = new ServerConn();
-
-function checkUsrInfo(): void {
-    const usrId = getCookie("usrId");
-    const usrEncPasswd = getCookie("usrEncPasswd");
-    authUsr(usrId, usrEncPasswd, {
-        onSuccess : () => {
-            setCookie("usrId", usrId, 3);
-            setCookie("usrEncPasswd", usrEncPasswd, 3);
-        },
-        onFailure : (msg: string) => {
-            if (msg == "nouser" || msg == "unauthorized"){
-                window.location.href = `${FRONTENDURL}/login.html`;
-            }
-            else{
-                alert(`Failed to check usrInfo - (${msg})`);
-            }
-        }
-    });
-}
 
 function eraseUsrInfo(){
     setCookie("usrId", "", -1);

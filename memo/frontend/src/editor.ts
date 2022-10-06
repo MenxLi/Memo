@@ -3,7 +3,9 @@ import {ServerConn} from './serverConn.js'
 import {stamp2Input, input2Stamp} from './libs/timeUtils.js'
 import {getCookie} from './libs/cookie.js';
 import { getMemoURL, MemoT, MemoManipulateResponseT} from './protocal.js';
+import {checkUsrInfo} from './login.js';
 
+checkUsrInfo();
 const conn = new ServerConn();
 const timeAddedInput: HTMLInputElement = document.querySelector("#timeAddedInput")!;
 const editSaveBtn: HTMLInputElement = document.querySelector("#editSaveBtn")!;
