@@ -5,7 +5,7 @@ import http.cookies
 
 from .protocalT import BriefInfoT, MemoManipulateT, MemoManipulateResponseT
 from .auth import checkUsr
-from .database import MemoDatabase, Memo
+from .database import MemoDatabase
 
 class BaseHandler(tornado.web.RequestHandler):
     cookies: http.cookies.SimpleCookie
@@ -113,7 +113,16 @@ class MemoHandler(BaseHandler):
             }
             self.write(dict(ret))
 
+        elif instruction["action"] == "delete":
+            if "memo_id" not in instruction:
+                raise tornado.web.HTTPError(400)
+            db.deleteMemo(instruction["memo_id"])
+            ret: MemoManipulateResponseT = {
+                "status": True
+            }
+            self.write(dict(ret))
+
         else:
-            raise NotImplementedError
+            raise tornado.web.HTTPError(400)
 
 

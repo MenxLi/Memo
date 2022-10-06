@@ -26,7 +26,8 @@ export interface MemoT {
 
 export interface MemoManipulateJsonT {
     action: "edit" | "delete";
-    memo: MemoT;
+    memo?: MemoT;
+    memo_id?: string;
 }
 
 export interface MemoManipulateResponseJsonT {
@@ -81,6 +82,25 @@ export class ServerConn{
         const postParams: MemoManipulateJsonT = {
             action: "edit",
             memo: memo
+        }
+        const response = await fetch(
+            `${this.BACKENDURL}/memo`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(postParams)
+            }
+        );
+        const ret: MemoManipulateResponseJsonT = await response.json();
+        return ret["status"];
+    }
+
+    async deleteMemo(memoId: string): Promise<boolean> {
+        const postParams: MemoManipulateJsonT = {
+            action: "delete",
+            memo_id: memoId,
         }
         const response = await fetch(
             `${this.BACKENDURL}/memo`,

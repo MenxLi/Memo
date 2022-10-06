@@ -6,11 +6,12 @@ import {getCookie} from './libs/cookie.js';
 const conn = new ServerConn();
 const timeAddedInput: HTMLInputElement = document.querySelector("#timeAddedInput")!;
 const editSaveBtn: HTMLInputElement = document.querySelector("#editSaveBtn")!;
+const deleteBtn: HTMLInputElement = document.querySelector("#deleteBtn")!;
 const inputView: HTMLTextAreaElement = document.querySelector("#inputView")!;
 let thisMemo: MemoT;
 
+/*Must call this function to initialize the window*/
 function loadMemo(memo: MemoT){
-
     // save a global reference
     thisMemo = memo;
 
@@ -52,6 +53,31 @@ function saveMemo(memo: MemoT){
         }
     )
    
+}
+
+function deleteMemo(memo: MemoT){
+    const memoId = memo.memo_id;
+    if (memoId === null){
+        alert("Can't delete local memo.");
+        return;
+    }
+    
+    if (!window.confirm(` 
+                        Delete this memo? 
+                        NO WAY TO GET IT BACK `)){
+        return;
+    }
+
+    conn.deleteMemo(memoId).then(
+        (status: boolean) => {
+            if (status) {
+                window.location.href = `${conn.FRONTENDURL}/index.html`;
+            }
+        },
+        (failed) => {
+            alert(`Failed to save. Error: ${failed}`);
+        }
+    )
 }
 
 /* swith inputView mode between view and edit */
@@ -119,4 +145,6 @@ inputView.addEventListener("input", () => {
 inputView.addEventListener("dblclick", switchModeEdit);
 
 editSaveBtn.addEventListener("click", onClickEditSaveBtn);
+
+deleteBtn.addEventListener("click", ()=>{deleteMemo(thisMemo)});
 

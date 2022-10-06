@@ -155,6 +155,16 @@ class MemoDatabase(Database):
                                 ))
         self.db_con.commit()
         return memo
+    
+    def deleteMemo(self, memo_id: str):
+        self.db_con.execute(
+            """
+            DELETE FROM memo
+            WHERE memo_id=?
+            """,
+            (memo_id,)
+        )
+        self.db_con.commit()
 
     def briefInfo(self, usr_id: str):
         """
