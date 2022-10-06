@@ -1,28 +1,78 @@
 
 div.index_entry{
     background-color: #eee;
+    color: var(--font-gray);;
     max-width: 80vw;
     margin: 10px;
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 12px;
+
+    display: flex;
+    /* center vertically */
+    align-items: center;
+    /* don't return to next line*/
+    flex-wrap: nowrap;
+
+    transition-property: all;
+    -webkit-transition-property: all; 
+    transition-duration: 0.2;
+    -webkit-transition-duration: 0.2s; 
+    transition-timing-function: ease;
+    -webkit-transition-timing-function: ease;
 }
 div.index_entry:hover{
-    background-color: #39d;
+    background-color: var(--bg-blue);
     color: white;
+    transform: scale(1.03);
 }
 div.index_entry:hover, div.index_entry *:hover {
     cursor: pointer;
 }
-label.uid{
+
+div.entry_bInfo{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-self: stretch;
+    font-family: 'Times New Roman', Times, serif, "宋体", SimSun, STSong;
+}
+
+label.time_added{
+    font-size: small;
+}
+
+label.memo_id{
     font-size: x-small;
     vertical-align: middle;
+    color: #9c9cc9;
+    margin-right: 0px;
+    margin-left: auto;
 }
 label.short_content{
     font-size: x-small;
     vertical-align: middle;
 }
 
+div.banner {
+    display: flex;
+    flex-direction: row;
+    max-width: 300px;
+}
+div.banner #logoutBtn{
+    flex-grow: 1;
+}
+div.banner #writeBtn{
+    flex-grow: 2;
+}
 div.banner input[type="button"]{
     min-width: 75px;
+    margin: 5px;
+}
+div.banner input[type="button"]:hover{
+    background-color: var(--bg-blue);
+    color: white;
 }

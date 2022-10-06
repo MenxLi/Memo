@@ -59,11 +59,12 @@ function render(briefInfo: BriefInfoT[]){
         entry.classList.add("index_entry");
         entry.classList.add(bInfo.uid);
         entry.innerHTML = `
-        <label class="time_added">${utcStamp2LocaleStr(bInfo.time_added, true)}</label>
-        <label class="title">${bInfo.title}</label>
-        <label class="uid">${bInfo.uid}</label>
-        <br>
-        <label class="short_content">${parseShortContent(bInfo.short_content)}</label>
+        <label class="time_added">${utcStamp2LocaleStr(bInfo.time_added, true).slice(0, -3)}</label>
+        <div class="entry_bInfo">
+            <label class="title">${bInfo.title}</label>
+            <label class="short_content">${parseShortContent(bInfo.short_content)}</label>
+        </div>
+        <label class="memo_id">${bInfo.uid}</label>
         `
         indexDiv.appendChild(entry);
 
