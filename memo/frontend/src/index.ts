@@ -3,7 +3,6 @@ import {FRONTENDURL} from './config.js'
 import {authUsr} from './login.js'
 import {ServerConn, BriefInfoT} from './serverConn.js'
 import { utcStamp2LocaleStr } from './libs/timeUtils.js'
-import "./banner.js"
 
 const conn = new ServerConn();
 
@@ -24,6 +23,11 @@ function checkUsrInfo(): void {
             }
         }
     });
+}
+
+function eraseUsrInfo(){
+    setCookie("usrId", "", -1);
+    setCookie("usrEncPasswd", "", -1);
 }
 
 function fetchBriefInfo(){
@@ -79,4 +83,9 @@ function render(briefInfo: BriefInfoT[]){
 // main
 checkUsrInfo();
 fetchBriefInfo();
-
+document.querySelector("div#banner #logoutBtn")?.addEventListener(
+    "click", () => {
+        eraseUsrInfo();
+        window.location.href = `${conn.FRONTENDURL}/login.html`;
+    }
+)
