@@ -20,7 +20,7 @@ abstract class LoggerAbstract implements Logger_t{
     
     name: string;
 
-    constructor(name: string, loglevel: logLevel_t = "info"){
+    constructor(name: string){
         this.name = name;
     }
 
