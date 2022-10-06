@@ -131,8 +131,8 @@ if __name__ == '__main__':
         exit()
 
     # require login
-    #  usr_id = promptLogin()
-    usr_id = "monsoon"
+    usr_id = promptLogin()
+    #  usr_id = "monsoon"
     if not usr_id:
         exit()
 

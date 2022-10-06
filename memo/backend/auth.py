@@ -44,7 +44,8 @@ def batchRegister(d: str):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--register", default=None)
+    parser.add_argument("-r", "--register", default=None,
+                        help = "format: '{ \"usr_id\": ..., \"usr_name\": ..., \"passwd\": ...}'")
     parser.add_argument("-R", "--register_batch", action="store_true", 
                         help = "read from stdin, with each line being: <usr_id>, <usr_name>, <passwd> ")
     parser.add_argument("-d", "--delete", default=None)
