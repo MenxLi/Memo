@@ -34,6 +34,8 @@ function render(briefInfo: BriefInfoT[]){
     }
 
     let bInfo: BriefInfoT;
+    // sort by time added reverse
+    briefInfo.sort((a, b) => {return b.time_added - a.time_added});
     const indexDiv: HTMLDivElement = document.querySelector("#index_main_div")!;
     for (bInfo of briefInfo){
         const entry = document.createElement("div");
