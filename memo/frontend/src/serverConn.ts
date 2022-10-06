@@ -7,7 +7,7 @@ import {
     BriefInfoT, 
     MemoT, 
     MemoManipulateJsonT, 
-    MemoManipulateResponseJsonT
+    MemoManipulateResponseT
 } from "./protocal.js"
 
 import {getCookie} from "./libs/cookie.js"
@@ -55,7 +55,7 @@ export class ServerConn{
         throw Error(`Got response (${response.status})`);
     }
 
-    async saveMemo(memo: MemoT): Promise<MemoManipulateResponseJsonT> {
+    async saveMemo(memo: MemoT): Promise<MemoManipulateResponseT> {
 
         const postParams: MemoManipulateJsonT = {
             action: "edit",
@@ -71,11 +71,11 @@ export class ServerConn{
                 body: JSON.stringify(postParams)
             }
         );
-        const ret: MemoManipulateResponseJsonT = await response.json();
+        const ret: MemoManipulateResponseT = await response.json();
         return ret;
     }
 
-    async deleteMemo(memoId: string): Promise<MemoManipulateResponseJsonT> {
+    async deleteMemo(memoId: string): Promise<MemoManipulateResponseT> {
         const postParams: MemoManipulateJsonT = {
             action: "delete",
             memo_id: memoId,
@@ -90,7 +90,7 @@ export class ServerConn{
                 body: JSON.stringify(postParams)
             }
         );
-        const ret: MemoManipulateResponseJsonT = await response.json();
+        const ret: MemoManipulateResponseT = await response.json();
         return ret;
     }
 }

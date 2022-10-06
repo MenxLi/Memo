@@ -1,4 +1,7 @@
-import {BACKENDURL, FRONTENDURL} from "./config.js"
+import {DOMAINURL, PORT} from "./config.js"
+
+export const BACKENDURL: string = `${DOMAINURL}:${PORT}/backend`;
+export const FRONTENDURL: string = `${DOMAINURL}:${PORT}`;
 
 export function getMemoURL(memo_id: string): string{
     const url = new URL(`${FRONTENDURL}/editor.html`);
@@ -13,8 +16,6 @@ export interface AuthInfoT {
 };
 
 export type AuthReturnT = "success" | "unauthorized" | "nouser";
-
-export {BACKENDURL, FRONTENDURL} from "./config.js"
 
 export interface BriefInfoT {
     uid: string;
@@ -42,8 +43,7 @@ export interface MemoManipulateJsonT {
     memo_id?: string;
 }
 
-export interface MemoManipulateResponseJsonT {
+export interface MemoManipulateResponseT {
     status: boolean;
     memo_id?: string;
 }
-

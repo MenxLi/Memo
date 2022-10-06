@@ -1,3 +1,3 @@
 
-export const BACKENDURL: string = 'http://localhost:8888/backend';
-export const FRONTENDURL: string = 'http://localhost:8888';
+export const DOMAINURL: string = 'http://localhost';
+export const PORT: string = '8888'
