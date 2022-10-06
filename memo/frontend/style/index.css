@@ -1,9 +1,16 @@
 
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
 div.index_entry{
     background-color: #eee;
     color: var(--font-gray);;
     max-width: 80vw;
-    margin: 10px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     padding: 10px;
     padding-left: 20px;
     padding-right: 20px;
@@ -15,7 +22,7 @@ div.index_entry{
     /* center vertically */
     align-items: center;
     /* don't return to next line*/
-    flex-wrap: nowrap;
+    flex-wrap:wrap ;
 
     transition-property: all;
     -webkit-transition-property: all; 
@@ -58,6 +65,12 @@ label.short_content{
 }
 
 div.banner {
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.banner div.btn{
     display: flex;
     flex-direction: row;
     max-width: 300px;
@@ -66,7 +79,7 @@ div.banner #logoutBtn{
     flex-grow: 1;
 }
 div.banner #writeBtn{
-    flex-grow: 2;
+    flex-grow: 1;
 }
 div.banner input[type="button"]{
     min-width: 75px;

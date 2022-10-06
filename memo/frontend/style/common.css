@@ -1,11 +1,12 @@
 :root{
     --bg-blue: #39d;
     --font-gray: #444;
+    --max-width: 1600px;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    max-width: 1600px;
+    max-width: var(--max-width);
 
     /* centering things */
     margin-left: auto;

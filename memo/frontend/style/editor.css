@@ -13,6 +13,10 @@ div.btn{
     margin-left: auto;
 }
 
+div.btn input[type="button"]{
+    min-width: 50px;
+}
+
 #inputView {
     min-height: 150px;
     width: 100%;
