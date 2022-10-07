@@ -4,7 +4,7 @@
 A simple diary app.  
 Use sqlite to save data, python-tornado backend and pure javascript (typescript) frontend.
 
-![screenshot](./docs/imgs/screenshot.png)
+![screenshot](http://limengxun.com/files/imgs/Memo_screenshot.png)
 
 ## Deployment
 
