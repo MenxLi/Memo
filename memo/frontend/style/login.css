@@ -8,7 +8,7 @@ body{
 }
 
 label#title{
-    font-size: large;
+    font-size: larger;
     margin: 10px;
     color: var(--font-color-gray);
     font-weight: bold;

@@ -35,10 +35,11 @@ div.btn input[type="button"]{
 
 #editSaveBtn {
     min-width: 100px;
-    margin-right: 0px;
-    margin-left: auto;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 #timeAddedInput {
     border: 0px;
+    font-size: smaller;
 }

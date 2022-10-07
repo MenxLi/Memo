@@ -49,7 +49,7 @@ div.entry_bInfo{
 }
 
 label.time_added{
-    font-size: small;
+    font-size: smaller;
 }
 
 label.memo_id{

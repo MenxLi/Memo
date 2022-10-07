@@ -5,6 +5,10 @@
     --font-song: "宋体", SimSun, STSong;
 }
 
+*{
+    font-size: large;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     max-width: var(--max-width);
@@ -16,8 +20,14 @@ body {
 
 input[type="button"]{
     border-radius: 5px;
-    min-height: 25px;
+    min-height: 30px;
+    font-size: smaller;
+    border-width: 1px;
+    background-color: #eee;
 }
+/* input[type="button"]:hover{ */
+/*     box-shadow: 0 0 5px #555; */
+/* } */
 
 .hoverMaxout{
     transition-property: all;
