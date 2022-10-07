@@ -1,28 +1,31 @@
 "use strict";
-var sha256 = function sha256(ascii) {
-    function rightRotate(value, amount) {
+// from: 
+// https://geraintluff.github.io/sha256/
+
+var sha256 = function sha256(ascii: string) {
+    function rightRotate(value: any, amount: number) {
         return (value >>> amount) | (value << (32 - amount));
     }
     ;
     var mathPow = Math.pow;
     var maxWord = mathPow(2, 32);
-    var lengthProperty = 'length';
+    var lengthProperty: 'length' = 'length';
     var i, j; // Used as a counter across the whole file
-    var result = '';
-    var words = [];
+    var result: string = '';
+    var words: any = [];
     var asciiBitLength = ascii[lengthProperty] * 8;
     //* caching results is optional - remove/add slash from front of this line to toggle
     // Initial hash value: first 32 bits of the fractional parts of the square roots of the first 8 primes
     // (we actually calculate the first 64, but extra values are just ignored)
-    var hash = sha256.h = sha256.h || [];
+    var hash = (sha256 as any).h = (sha256 as any).h || [];
     // Round constants: first 32 bits of the fractional parts of the cube roots of the first 64 primes
-    var k = sha256.k = sha256.k || [];
+    var k = (sha256 as any).k = (sha256 as any).k || [];
     var primeCounter = k[lengthProperty];
     /*/
     var hash = [], k = [];
     var primeCounter = 0;
     //*/
-    var isComposite = {};
+    var isComposite: any = {};
     for (var candidate = 2; primeCounter < 64; candidate++) {
         if (!isComposite[candidate]) {
             for (i = 0; i < 313; i += candidate) {
