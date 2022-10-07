@@ -22,8 +22,8 @@ function fetchBriefInfo(){
 }
 
 function render(briefInfo: BriefInfoT[]){
-    function parseShortContent(scontent: string): string{
-        const MAX_LEN = 25;
+    function clipShortContent(scontent: string): string{
+        const MAX_LEN = 40;
         console.log(scontent);
         let ret = scontent.replace("\n/g", " ");
         if (ret.length > MAX_LEN) {
@@ -45,9 +45,9 @@ function render(briefInfo: BriefInfoT[]){
         <label class="time_added">${utcStamp2LocaleStr(bInfo.time_added, true).slice(0, -3)}</label>
         <div class="entry_bInfo">
             <label class="title">${bInfo.title}</label>
-            <label class="short_content">${parseShortContent(bInfo.short_content)}</label>
+            <label class="short_content">${clipShortContent(bInfo.short_content)}</label>
         </div>
-        <label class="memo_id">${bInfo.uid}</label>
+        <label class="memo_id">${bInfo.uid.slice(0, 12)}</label>
         `
         indexDiv.appendChild(entry);
 
