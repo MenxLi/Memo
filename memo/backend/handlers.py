@@ -12,7 +12,6 @@ class BaseHandler(tornado.web.RequestHandler):
 
     def validateUsr(self) -> bool:
         usr_enc_passwd = self.get_cookie("usrEncPasswd", default="0")
-        print(f"Checking: {self.usr_id} - {usr_enc_passwd}")
         return checkUsr(self.usr_id, usr_enc_passwd) == "success"
 
     @property
@@ -30,10 +29,13 @@ class AuthHandler(BaseHandler):
         usr_id = body["usrId"]
         usr_enc_passwd = body["usrEncPasswd"]
 
-        print(f"Checking usr: {usr_id}")
+        status = checkUsr(usr_id, usr_enc_passwd)
+        self.write(status)
 
-        self.write(checkUsr(usr_id, usr_enc_passwd))
-
+        # print
+        print(f"checking usr info: {usr_id} ({status})")
+        if status == "unauthorized":
+            print(f"wrong encpasswd: {usr_enc_passwd}")
 
 class IndexHandler(BaseHandler):
     def get(self):
@@ -101,7 +103,6 @@ class MemoHandler(BaseHandler):
             if "memo" not in instruction:
                 raise tornado.web.HTTPError(400)
             memo = instruction["memo"]
-            print(memo)
             memo_new = db.edit(
                 self.usr_id, 
                 content = memo["content"],
@@ -115,6 +116,7 @@ class MemoHandler(BaseHandler):
                 # Created new memo
                 ret["memo_id"] = memo_new["memo_id"]
             self.write(dict(ret))
+            print(f"Got memo edit request: {memo['memo_id']}")
 
         elif instruction["action"] == "delete":
             if "memo_id" not in instruction:
@@ -124,6 +126,7 @@ class MemoHandler(BaseHandler):
                 "status": True
             }
             self.write(dict(ret))
+            print(f"Got memo delete request: {instruction['memo_id']}")
 
         else:
             raise tornado.web.HTTPError(400)
