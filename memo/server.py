@@ -1,4 +1,4 @@
-import asyncio, os
+import asyncio, os, argparse
 import tornado.web
 import tornado.autoreload
 from tornado.routing import _RuleList
@@ -24,17 +24,19 @@ def make_app():
 
     return tornado.web.Application(
         rules,
-        settings={
-            "autoreload": True
-        }
     )
 
-async def main():
+async def main(port: int):
     app = make_app()
-    app.listen(16708)
+    print("Starting server at port: ", port)
+    app.listen(port)
     tornado.autoreload.add_reload_hook(autoreloadHook)
     tornado.autoreload.start()
     await asyncio.Event().wait()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description="Memo server")
+    parser.add_argument("-p", "--port", type=int, default=8888);
+    args = parser.parse_args()
+
+    asyncio.run(main(args.port))
