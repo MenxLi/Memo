@@ -8,7 +8,7 @@ import {
     MemoT, 
     MemoManipulateJsonT, 
     MemoManipulateResponseT
-} from "./protocal.js"
+} from "./protocol.js"
 
 import {getCookie} from "./libs/cookie.js"
 

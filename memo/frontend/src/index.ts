@@ -1,5 +1,5 @@
 import {setCookie} from './libs/cookie.js'
-import {getMemoURL, BriefInfoT} from './protocal.js'
+import {getMemoURL, BriefInfoT} from './protocol.js'
 import {ServerConn} from './serverConn.js'
 import { checkUsrInfo } from './login.js'
 import { utcStamp2LocaleStr } from './libs/timeUtils.js'

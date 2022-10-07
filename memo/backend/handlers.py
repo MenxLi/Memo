@@ -3,7 +3,7 @@ import json
 import tornado.web
 import http.cookies
 
-from .protocalT import BriefInfoT, MemoManipulateT, MemoManipulateResponseT
+from .protocolT import BriefInfoT, MemoManipulateT, MemoManipulateResponseT
 from .auth import checkUsr
 from .database import MemoDatabase
 

@@ -2,7 +2,7 @@
 import {ServerConn} from './serverConn.js'
 import {stamp2Input, input2Stamp} from './libs/timeUtils.js'
 import {getCookie} from './libs/cookie.js';
-import { getMemoURL, MemoT, MemoManipulateResponseT} from './protocal.js';
+import { getMemoURL, MemoT, MemoManipulateResponseT} from './protocol.js';
 import {checkUsrInfo} from './login.js';
 
 checkUsrInfo();

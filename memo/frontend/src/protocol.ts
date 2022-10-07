@@ -9,7 +9,7 @@ export function getMemoURL(memo_id: string): string{
     return url.toString();
 }
 
-// Protocals
+// Protocols
 export interface AuthInfoT {
     usrId: string;
     usrEncPasswd: string;

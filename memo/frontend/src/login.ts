@@ -1,7 +1,7 @@
 
 import {setCookie, getCookie} from "./libs/cookie.js";
 import {sha256} from "./libs/sha256lib.js"
-import {BACKENDURL, AuthInfoT, FRONTENDURL} from './protocal.js'
+import {BACKENDURL, AuthInfoT, FRONTENDURL} from './protocol.js'
 
 function onSubmitLogin(){
     const usrIdInput: HTMLInputElement = document.querySelector("#usr_id")!; // ! <- non-null assertion
