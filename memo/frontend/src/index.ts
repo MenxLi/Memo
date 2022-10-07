@@ -59,6 +59,15 @@ function render(briefInfo: BriefInfoT[]){
         }
 
         entry.addEventListener("click", redirectMethod());
+    };
+
+    if (briefInfo.length === 0){
+        // When empty memo,
+        // create a prompt label
+        const emptyPrompt = document.createElement("div");
+        emptyPrompt.id = "emptyPromptDiv";
+        emptyPrompt.innerHTML = "<p>Click on the write button to add your first memo!</p>";
+        indexDiv.appendChild(emptyPrompt);
     }
 }
 

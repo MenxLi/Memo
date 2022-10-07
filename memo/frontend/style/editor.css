@@ -19,7 +19,7 @@ div.btn input[type="button"]{
 }
 
 #inputView {
-    min-height: 150px;
+    min-height: 200px;
     width: 100%;
     margin-top: 5px;
     /* https://stackoverflow.com/a/4180863/6775765 */
