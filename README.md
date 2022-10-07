@@ -4,7 +4,7 @@
 A simple diary app.  
 Use sqlite to save data, python-tornado backend and pure javascript (typescript) frontend.
 
-![screenshot](http://limengxun.com/files/imgs/Memo_screenshot.png)
+![screenshot](http://limengxun.com/files/imgs/Memo.png)
 
 ## Deployment
 
@@ -30,4 +30,9 @@ python -m memo.backend.auth -r '{ "usr_id": "...", "usr_name": "...", "passwd": 
 # change <port> to your value
 python -m memo.server -p <port>
 ```
+
 visit `http://localhost:<port>` to use the app.
+
+---
+
+![screenshot-gif](http://limengxun.com/files/imgs/Memo.gif)
