@@ -22,7 +22,8 @@ export function utcStamp2LocaleStr(stamp: number, isSecond = false): string{
 
     let ret = `${year}-${month}-${date} `
     const options = {
-        hour12: false as const,
+        // hour12: false as const,
+        hourCycle: 'h23' as const,      // force display midnight hour as 00
         hour:  "2-digit" as const,
         minute: "2-digit" as const,
         second: "2-digit" as const
