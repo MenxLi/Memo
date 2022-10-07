@@ -1,6 +1,7 @@
 
 body {
     margin-bottom: 0px;
+    max-width: 80vw;
 }
 
 div.operation{
@@ -27,7 +28,7 @@ div.btn input[type="button"]{
     border: 0px;
     border-radius: 5px;
     color: #333;
-    font-family: "宋体", SimSun, STSong;
+    font-family: var(--font-song);;
     letter-spacing:normal;
     line-height:1.5;
 }

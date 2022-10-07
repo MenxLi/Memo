@@ -7,7 +7,7 @@ body {
 
 div.index_entry{
     background-color: #eee;
-    color: var(--font-gray);;
+    color: var(--font-color-gray);;
     max-width: 80vw;
     margin-top: 12px;
     margin-bottom: 12px;
@@ -45,7 +45,7 @@ div.entry_bInfo{
     display: flex;
     flex-direction: column;
     justify-self: stretch;
-    font-family: 'Times New Roman', Times, serif, "宋体", SimSun, STSong;
+    font-family: 'Times New Roman', Times, serif, var(--font-song);
 }
 
 label.time_added{

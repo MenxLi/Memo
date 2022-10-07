@@ -1,7 +1,8 @@
 :root{
     --bg-blue: #39d;
-    --font-gray: #444;
     --max-width: 1600px;
+    --font-color-gray: #444;
+    --font-song: "宋体", SimSun, STSong;
 }
 
 body {
@@ -18,3 +19,36 @@ input[type="button"]{
     min-height: 25px;
 }
 
+.hoverMaxout{
+    transition-property: all;
+    -webkit-transition-property: all; 
+    transition-duration: 0.2;
+    -webkit-transition-duration: 0.2s; 
+    transition-timing-function: ease;
+    -webkit-transition-timing-function: ease;
+}
+
+.hoverMaxout:hover{
+    transform: scale(1.1);
+    /* box-shadow: 1px 1px 5px #555; */
+    background-color: var(--bg-blue);
+    color: white;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(5%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.gradIn {
+    animation-duration: 0.25s; /* the duration of the animation */
+    animation-timing-function: ease-out; /* how the animation will behave */
+    animation-delay: 0s; /* how long to delay the animation from starting */
+    animation-iteration-count: 1; /* how many times the animation will play */
+    animation-name: slideIn; /* the name of the animation we defined above */
+}

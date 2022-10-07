@@ -10,7 +10,7 @@ body{
 label#title{
     font-size: large;
     margin: 10px;
-    color: var(--font-gray);
+    color: var(--font-color-gray);
     font-weight: bold;
 }
 
