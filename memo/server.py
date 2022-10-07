@@ -5,6 +5,7 @@ from tornado.routing import _RuleList
 from .backend.handlers import AuthHandler, IndexHandler, MemoHandler
 
 __this_dir = os.path.dirname(__file__)
+frontend_root = os.path.join(__this_dir, "frontend")
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -16,6 +17,7 @@ def autoreloadHook():
 def make_app():
 
     rules: _RuleList = [
+        (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": frontend_root}),
         (r"^/backend/auth", AuthHandler),
         (r"^/backend/index", IndexHandler),
         (r"^/backend/memo", MemoHandler),
