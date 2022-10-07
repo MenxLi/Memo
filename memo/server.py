@@ -19,7 +19,11 @@ def make_app():
         (r"^/backend/auth", AuthHandler),
         (r"^/backend/index", IndexHandler),
         (r"^/backend/memo", MemoHandler),
-        (r"^/(.*?)$", tornado.web.StaticFileHandler, {"path": os.path.join(__this_dir, "frontend")}),
+        (r"^/(.*?)$", tornado.web.StaticFileHandler, 
+            {
+                "path": os.path.join(__this_dir, "frontend"),
+                "default_filename":"index.html"
+            }),
     ]
 
     return tornado.web.Application(

@@ -27,7 +27,7 @@ python -m memo.backend.auth -r '{ "usr_id": "...", "usr_name": "...", "passwd": 
 
 #### Start server
 ```bash
-# start at designated port
-# change ... to your value
-python -m memo.server -p ...
+# change <port> to your value
+python -m memo.server -p <port>
 ```
+visit `http://localhost:<port>` to use the app.
