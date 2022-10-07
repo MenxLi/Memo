@@ -1,3 +1,4 @@
+import {getLogger} from "./logging.js";
 
 /*
  * return locale time in format: yyyy-mm-dd hh:mm:ss
@@ -36,7 +37,10 @@ export function utcStamp2LocaleStr(stamp: number, isSecond = false): string{
  * set a time stamp to a datetime-local input field
 * */
 export function stamp2Input(stamp: number, inputElem: HTMLInputElement, isSecond = false): void {
-    inputElem.value = utcStamp2LocaleStr(stamp, isSecond).replace(" ", "T");
+    const logger = getLogger("memo");
+    const localeTimeStr = utcStamp2LocaleStr(stamp, isSecond).replace(" ", "T");
+    logger.debug(`Setting time to datetime-local input - ${localeTimeStr} (${stamp2Input.name})`)
+    inputElem.value = localeTimeStr;
 }
 
 /*
