@@ -87,7 +87,13 @@ export function authUsr(
 }
 
 function encTextSha256(txt: string): string{
-    return sha256(txt);
+    const enc = sha256(txt);
+    if (enc){
+        return enc
+    }
+    else{
+        throw new Error("Error on encoding sha256: check if you input non-ascii code...")
+    }
 }
 
 // main
