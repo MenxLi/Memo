@@ -1,4 +1,7 @@
 
+/*
+ * return locale time in format: yyyy-mm-dd hh:mm:ss
+* */
 export function utcStamp2LocaleStr(stamp: number, isSecond = false): string{
     if (isSecond) stamp *= 1000;
     const d = new Date(stamp);
@@ -17,7 +20,14 @@ export function utcStamp2LocaleStr(stamp: number, isSecond = false): string{
     }
 
     let ret = `${year}-${month}-${date} `
-    ret += d.toLocaleTimeString();
+    const options = {
+        hour12: false as const,
+        hour:  "2-digit" as const,
+        minute: "2-digit" as const,
+        second: "2-digit" as const
+    };
+    ret += d.toLocaleTimeString("en-US", options);
+ 
     return ret;
 }
 
