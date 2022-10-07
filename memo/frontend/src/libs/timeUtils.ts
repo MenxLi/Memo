@@ -27,7 +27,7 @@ export function utcStamp2LocaleStr(stamp: number, isSecond = false): string{
         minute: "2-digit" as const,
         second: "2-digit" as const
     };
-    ret += d.toLocaleTimeString("en-US", options);
+    ret += d.toLocaleTimeString([], options);
  
     return ret;
 }
