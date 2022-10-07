@@ -33,6 +33,7 @@ function render(briefInfo: BriefInfoT[]){
     }
 
     let bInfo: BriefInfoT;
+    let animationDelay = 0;
     // sort by time added reverse
     briefInfo.sort((a, b) => {return b.time_added - a.time_added});
     const indexDiv: HTMLDivElement = document.querySelector("#index_main_div")!;
@@ -48,6 +49,12 @@ function render(briefInfo: BriefInfoT[]){
         </div>
         <label class="memo_id">${bInfo.uid.slice(0, 12)}</label>
         `
+
+        // animation gradually fade in
+        entry.classList.add("gradIn2");
+        entry.style.animationDelay = (animationDelay + Math.random()*0.1).toString() + "s";
+        animationDelay += 0.05;
+
         indexDiv.appendChild(entry);
 
         // enclosure of the uid
