@@ -24,7 +24,6 @@ function fetchBriefInfo(){
 function render(briefInfo: BriefInfoT[]){
     function clipShortContent(scontent: string): string{
         const MAX_LEN = 40;
-        console.log(scontent);
         let ret = scontent.replace("\n/g", " ");
         if (ret.length > MAX_LEN) {
             ret = ret.slice(undefined, MAX_LEN);

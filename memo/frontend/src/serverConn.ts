@@ -49,7 +49,6 @@ export class ServerConn{
         const response = await fetch(fetchUrl.toString());
         if (response.ok){
             const memo: MemoT = await response.json();
-            console.log(memo);
             return memo;
         }
         throw Error(`Got response (${response.status})`);
