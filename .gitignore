@@ -2,13 +2,15 @@ __pycache__
 
 *.swp
 *.vscode
+*.DS_Store
+__pycache__
+*.swp
+*.vscode
 
 *.db
 *.log
 
 *.tmp.*
-
-*.db
 
 # Ignore frontend javascript
 # To be compiled from typescript
