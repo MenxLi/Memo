@@ -1,16 +1,10 @@
-import {setCookie} from './libs/cookie.js'
 import {getMemoURL, BriefInfoT} from './protocol.js'
 import {ServerConn} from './serverConn.js'
-import { checkUsrInfo } from './login.js'
+import { checkUsrInfo, eraseUsrInfo } from './login.js'
 import { utcStamp2LocaleStr } from './libs/timeUtils.js'
 import { setValueChangeOnHover } from './libs/uiUtils.js'
 
 const conn = new ServerConn();
-
-function eraseUsrInfo(){
-    setCookie("usrId", "", -1);
-    setCookie("usrEncPasswd", "", -1);
-}
 
 function fetchBriefInfo(){
     conn.index().then(

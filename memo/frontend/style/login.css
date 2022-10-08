@@ -25,8 +25,11 @@ div.main form *{
     margin: 5px;
 }
 
-input{
+input[type="button"]{
     width:90%;
+}
+label[for="stay_login_chk"]{
+    font-size: smaller;
 }
 
 #submit_login_btn{
