@@ -35,4 +35,4 @@ visit `http://localhost:<port>` to use the app.
 
 ---
 
-![screenshot-gif](http://limengxun.com/files/imgs/Memo.gif)
+![screenshot-gif](http://limengxun.com/files/imgs/memo.gif)
