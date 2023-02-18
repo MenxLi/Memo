@@ -122,4 +122,11 @@ function encTextSha256(txt: string): string{
 const submitBtn = document.querySelector("#submit_login_btn");
 if (submitBtn){
     submitBtn.addEventListener("click", onSubmitLogin);
+    const passwdInput: HTMLInputElement = <HTMLInputElement>document.querySelector("#usr_passwd");
+    passwdInput.addEventListener("keypress", function(event: KeyboardEvent){
+        if (event.key === "Enter"){
+            onSubmitLogin();
+        }
+    });
+
 }
