@@ -10,7 +10,7 @@ if not os.path.exists(MEMO_HOME):
 DB_PATH = os.path.join(MEMO_HOME, "memo.db")
 
 def setLogger():
-    log_file = os.path.join(MEMO_HOME, "logging.log")
+    log_file = os.path.join(MEMO_HOME, "memo.log")
     print("Setting up logger (file: {})".format(log_file))
 
     logger = logging.getLogger("memo")
