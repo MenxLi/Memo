@@ -1,4 +1,4 @@
-import asyncio, os, argparse
+import asyncio, os, argparse, logging
 import tornado.web
 import tornado.autoreload
 from tornado.routing import _RuleList
@@ -7,12 +7,10 @@ from .backend.handlers import AuthHandler, IndexHandler, MemoHandler
 __this_dir = os.path.dirname(__file__)
 frontend_root = os.path.join(__this_dir, "frontend")
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
+logger = logging.getLogger("memo")
 
 def autoreloadHook():
-    print("Restart server.")
+    logger.info("Restart server.")
 
 def make_app():
 
@@ -34,7 +32,7 @@ def make_app():
 
 async def main(port: int):
     app = make_app()
-    print("Starting server at port: ", port)
+    logger.info(f"Starting server at port: {port}")
     app.listen(port)
     tornado.autoreload.add_reload_hook(autoreloadHook)
     tornado.autoreload.start()
@@ -42,7 +40,7 @@ async def main(port: int):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Memo server")
-    parser.add_argument("-p", "--port", type=int, default=8888);
+    parser.add_argument("-p", "--port", type=int, default=8888)
     args = parser.parse_args()
 
     asyncio.run(main(args.port))

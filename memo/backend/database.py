@@ -24,8 +24,8 @@ class Memo(TypedDict):
     attachment: List[str]   # List of file names associated with this memo_id
 
 class Database(object):
+    from .config import DB_PATH
     logger = logging.getLogger("memo")
-    DB_PATH = db_path
 
     def __init__(self):
         if not os.path.exists(self.DB_PATH):
@@ -225,9 +225,12 @@ class UsrDatabase(Database):
                 """).fetchall()
         return [i[0] for i in selection ]
 
-    def changeNameAndPassword(self, usr_id: str, name: str, access_key: str):
+    def changeNameAndPassword(self, usr_id: str, name: str, access_key: str) -> bool:
         self.logger.info(f"Change name and passwd: {usr_id} - {name}")
         usr = self[usr_id]
+        if usr is None:
+            self.logger.warning("User not in database, aborting changes.")
+            return False
         assert usr is not None
         self.db_con.execute(
             """
@@ -243,6 +246,7 @@ class UsrDatabase(Database):
             )
         )
         self.db_con.commit()
+        return True
 
     def register(self, usr_id, usr_name, access_key) -> bool:
         if not self[usr_id] is None:
