@@ -1,10 +1,9 @@
 
 # Memo
 
-A simple diary app.  
-Use sqlite to save data, python-tornado backend and pure javascript (typescript) frontend.
+**A super simple diary app.**  
 
-![screenshot](http://limengxun.com/files/imgs/Memo.png)
+Use sqlite to save data, python-tornado backend and pure javascript (typescript) frontend.
 
 ## Deployment
 
